@@ -1,0 +1,33 @@
+name: push
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: set version
+        run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
+      - name: setup
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.x
+      - name: restore
+        run: dotnet restore
+      - name: build
+        run: dotnet build --no-restore --configuration /p:Version=${VERSION}
+      - name: test
+        run: dotnet test --no-build --verbosity normal --configuration Release /p:Version=${VERSION}
+      - name: pack
+        run: dotnet pack --configuration Release /p:Version=${VERSION} --no-build --output .
+      - name: push
+        run: dotnet nuget push PaginatR.${VERSION}.nupkg --source https://nuget.pkg.github.com/SamuelMunoz/index.json --api-key ${GITHUB_TOKEN}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
