@@ -8,7 +8,6 @@
     <RepositoryType>git</RepositoryType>
     <Authors>Samuel Munoz</Authors>
     <PackageProjectUrl>https://github.com/SamuelMunoz/PaginatR</PackageProjectUrl>
-    <PackageVersion>1.0.0</PackageVersion>
     <RepositoryUrl>https://github.com/SamuelMunoz/PaginatR</RepositoryUrl>
   </PropertyGroup>
 
