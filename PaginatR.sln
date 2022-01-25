@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{84E75697-EE3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaginatR", "src\PaginatR\PaginatR.csproj", "{771210A4-8FFE-4FEA-AD2F-565DBD989747}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{6E5A7C22-EAE0-4B91-8BA1-29D1741E243E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaginatR.Tests", "tests\PaginatR.Tests\PaginatR.Tests.csproj", "{C1553C23-E4C4-47B2-B3DC-CC94CCF816D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,8 +24,13 @@ Global
 		{771210A4-8FFE-4FEA-AD2F-565DBD989747}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{771210A4-8FFE-4FEA-AD2F-565DBD989747}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{771210A4-8FFE-4FEA-AD2F-565DBD989747}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1553C23-E4C4-47B2-B3DC-CC94CCF816D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1553C23-E4C4-47B2-B3DC-CC94CCF816D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1553C23-E4C4-47B2-B3DC-CC94CCF816D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1553C23-E4C4-47B2-B3DC-CC94CCF816D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{771210A4-8FFE-4FEA-AD2F-565DBD989747} = {84E75697-EE3B-473F-BC2B-FB617C91CA63}
+		{C1553C23-E4C4-47B2-B3DC-CC94CCF816D5} = {6E5A7C22-EAE0-4B91-8BA1-29D1741E243E}
 	EndGlobalSection
 EndGlobal
