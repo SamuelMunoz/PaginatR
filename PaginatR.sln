@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{84E75697-EE3B-473F-BC2B-FB617C91CA63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaginatR", "src\PaginatR\PaginatR.csproj", "{771210A4-8FFE-4FEA-AD2F-565DBD989747}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{771210A4-8FFE-4FEA-AD2F-565DBD989747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{771210A4-8FFE-4FEA-AD2F-565DBD989747}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{771210A4-8FFE-4FEA-AD2F-565DBD989747}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{771210A4-8FFE-4FEA-AD2F-565DBD989747}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{771210A4-8FFE-4FEA-AD2F-565DBD989747} = {84E75697-EE3B-473F-BC2B-FB617C91CA63}
+	EndGlobalSection
+EndGlobal
