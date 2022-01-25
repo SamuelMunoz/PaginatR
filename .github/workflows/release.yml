@@ -22,7 +22,7 @@ jobs:
       - name: restore
         run: dotnet restore
       - name: build
-        run: dotnet build --no-restore --configuration /p:Version=${VERSION}
+        run: dotnet build --no-restore --configuration Release /p:Version=${VERSION}
       - name: test
         run: dotnet test --no-build --verbosity normal --configuration Release /p:Version=${VERSION}
       - name: pack
