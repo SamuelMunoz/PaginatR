@@ -27,7 +27,11 @@ jobs:
         run: dotnet test --no-build --verbosity normal --configuration Release /p:Version=${VERSION}
       - name: pack
         run: dotnet pack --configuration Release /p:Version=${VERSION} --no-build --output .
-      - name: push
+      - name: push to nuget packages
+        run: dotnet nuget push PaginatR.${VERSION}.nupkg --source https://api.nuget.org/v3/index.json --api-key ${NUGET_KEY} --skip-duplicate
+        env:
+          NUGET_KEY: ${{ secrets.NUGET_KEY }}
+      - name: push to github packages
         run: dotnet nuget push PaginatR.${VERSION}.nupkg --source https://nuget.pkg.github.com/SamuelMunoz/index.json --api-key ${GITHUB_TOKEN}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
