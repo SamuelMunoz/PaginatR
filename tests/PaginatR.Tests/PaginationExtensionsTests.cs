@@ -32,7 +32,7 @@ public class PaginationExtensionsTests
         _request = new(page, size);
 
         // act
-        var result = await _data.ToPaginatedAsync(_request, x => x.Id, _cts.Token);
+        var result = await _data.ToPaginatedAsync<TestData, int, TestData>(_request, x => x.Id, _cts.Token);
         
         // assert
         result.Should().NotBeNull().And.BeOfType<PaginationResponse<TestData>>();
