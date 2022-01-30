@@ -10,7 +10,7 @@ internal static class PaginationProcessing
     /// </summary>
     /// <param name="queryable">The queryable object</param>
     /// <param name="request">The request object</param>
-    /// <typeparam name="T">The type</typeparam>
+    /// <typeparam name="T">The type to be used</typeparam>
     /// <returns>Tuple with skip and take to be used with LINQ</returns>
     internal static (int?, int?) CalculatePagination<T>(IQueryable<T> queryable, PaginationRequest request)
     {

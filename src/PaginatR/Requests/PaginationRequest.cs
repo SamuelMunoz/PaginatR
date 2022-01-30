@@ -8,12 +8,12 @@ public class PaginationRequest
     /// <summary>
     /// The page number to request
     /// </summary>
-    public int? PageNumber { get; set; }
+    public int? PageNumber { get; }
     
     /// <summary>
     /// The total number of items per page
     /// </summary>
-    public int? PageSize { get; set; }
+    public int? PageSize { get; }
 
     /// <summary>
     /// The pagination request object
