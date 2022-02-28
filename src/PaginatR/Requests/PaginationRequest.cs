@@ -8,27 +8,19 @@ namespace PaginatR.Requests
         /// <summary>
         /// The page number to request
         /// </summary>
-        public int? PageNumber { get; }
+        public int? PageNumber { get; set; }
     
         /// <summary>
         /// The total number of items per page
         /// </summary>
-        public int? PageSize { get; }
-
-        /// <summary>
-        /// The pagination request object
-        /// </summary>
-        public PaginationRequest() : this(1, 15)
-        {
-        
-        }
+        public int? PageSize { get; set;  }
 
         /// <summary>
         /// The pagination request object
         /// </summary>
         /// <param name="pageNumber">The page number to request</param>
         /// <param name="pageSize">The total number of items per page</param>
-        public PaginationRequest(int? pageNumber, int? pageSize)
+        public PaginationRequest(int? pageNumber = 1, int? pageSize = 15)
         {
             PageNumber = pageNumber;
             PageSize = pageSize;

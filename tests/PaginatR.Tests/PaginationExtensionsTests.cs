@@ -65,6 +65,7 @@ public class PaginationExtensionsTests
         result.Should().NotBeNull().And.BeOfType<PaginationResponse<TestData>>();
         result.Data.Should().BeOfType<List<TestData>>().And.HaveCount(size);
         result.As<PaginationResponse<TestData>>().TotalPages.Should().Be(expectedPages);
+        result.As<PaginationResponse<TestData>>().PageNumber.Should().Be(page);
     }
     
     [Fact]
