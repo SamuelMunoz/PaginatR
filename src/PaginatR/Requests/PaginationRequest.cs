@@ -15,6 +15,11 @@ namespace PaginatR.Requests
         /// </summary>
         public int? PageSize { get; set;  }
 
+        public PaginationRequest()
+        {
+            
+        }
+
         /// <summary>
         /// The pagination request object
         /// </summary>
