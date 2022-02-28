@@ -4,6 +4,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Ardalis.GuardClauses;
+using PaginatR.Enums;
 using PaginatR.Requests;
 
 namespace PaginatR.Process
@@ -31,24 +33,38 @@ namespace PaginatR.Process
         /// <param name="queryable">The queryable object</param>
         /// <param name="skip">How many records will be skipped</param>
         /// <param name="pageSize">And how many record will be retrieved</param>
-        /// <param name="orderBy">The OrderBy column</param>
+        /// <param name="orderBy">The orderBy column</param>
+        /// <param name="direction">The orderBy direction</param>
         /// <param name="cancellationToken">The cancellation token</param>
         /// <typeparam name="T">The type</typeparam>
         /// <typeparam name="TOrderBy">The order by type</typeparam>
         /// <returns>A task-based list of results</returns>
         internal static Task<List<T>> QueryPaginatedAsync<T, TOrderBy>(IQueryable<T> queryable, int? skip, int? pageSize,
-            Expression<Func<T, TOrderBy>> orderBy, CancellationToken cancellationToken)
+            Expression<Func<T, TOrderBy>> orderBy, OrderDirection direction, CancellationToken cancellationToken)
         {
             if (cancellationToken.IsCancellationRequested)
             {
                 return Task.FromCanceled<List<T>>(cancellationToken);
             }
-        
+
+            Guard.Against.Null(queryable, nameof(queryable));
+            Guard.Against.Null(skip, nameof(skip));
+            Guard.Against.Null(pageSize, nameof(pageSize));
+
             var data = queryable
-                .OrderByDescending(orderBy)
-                .Skip(skip ?? 0)
-                .Take(pageSize ?? 15)
+                .OrderBy(orderBy)
+                .Skip((int) skip)
+                .Take((int) pageSize)
                 .ToList();
+
+            if (direction == OrderDirection.Descending)
+            {
+                data = queryable
+                    .OrderByDescending(orderBy)
+                    .Skip((int) skip)
+                    .Take((int) pageSize)
+                    .ToList();
+            }
 
             return Task.FromResult(data);
         }

@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Mapster;
+using PaginatR.Enums;
 using PaginatR.Process;
 using PaginatR.Requests;
 using PaginatR.Responses;
@@ -16,20 +17,58 @@ namespace PaginatR.Extensions
         /// <summary>
         /// Paginates the queryable sent
         /// </summary>
-        /// <param name="queryable">The queryable</param>
-        /// <param name="request">The pagination request</param>
+        /// <param name="queryable">The queryable to be paginated</param>
         /// <param name="orderBy">The orderBy expression</param>
         /// <param name="cancellationToken">The cancellation token</param>
         /// <typeparam name="TIn">The type of the queryable source</typeparam>
         /// <typeparam name="TOrderBy">The orderBy type</typeparam>
-        /// <typeparam name="TOut">The type to which the object will be converted to</typeparam>
+        /// <typeparam name="TOut">The type to which the object will be mapped to</typeparam>
         /// <returns>A pagination response with the data paginated</returns>
+        public static async Task<PaginationResponse<TOut>> ToPaginatedAsync<TIn, TOrderBy, TOut>(
+            this IQueryable<TIn> queryable, Expression<Func<TIn, TOrderBy>> orderBy,
+            CancellationToken cancellationToken)
+        {
+            return await ToPaginatedAsync<TIn, TOrderBy, TOut>(queryable, orderBy, OrderDirection.Ascending, 
+                cancellationToken);
+        }
+        
+        /// <summary>
+        /// Paginates the queryable sent
+        /// </summary>
+        /// <param name="queryable">The queryable to be paginated</param>
+        /// <param name="orderBy">The orderBy expression</param>
+        /// <param name="direction">The orderBy direction</param>
+        /// <param name="cancellationToken">The cancellation token</param>
+        /// <typeparam name="TIn">The type of the queryable source</typeparam>
+        /// <typeparam name="TOrderBy">The orderBy type</typeparam>
+        /// <typeparam name="TOut">The type to which the object will be mapped to</typeparam>
+        /// <returns>A pagination response with the results paginated</returns>
+        public static async Task<PaginationResponse<TOut>> ToPaginatedAsync<TIn, TOrderBy, TOut>(
+            this IQueryable<TIn> queryable, Expression<Func<TIn, TOrderBy>> orderBy, OrderDirection direction,
+            CancellationToken cancellationToken)
+        {
+            return await ToPaginatedAsync<TIn, TOrderBy, TOut>(queryable, new PaginationRequest(), orderBy,
+                direction, cancellationToken);
+        }
+
+        /// <summary>
+        /// Paginates the queryable sent
+        /// </summary>
+        /// <param name="queryable">The queryable to be paginated</param>
+        /// <param name="request">The pagination request</param>
+        /// <param name="orderBy">The orderBy expression</param>
+        /// <param name="direction">The orderBy direction</param>
+        /// <param name="cancellationToken">The cancellation token</param>
+        /// <typeparam name="TIn">The type of the queryable source</typeparam>
+        /// <typeparam name="TOrderBy">The orderBy type</typeparam>
+        /// <typeparam name="TOut">The type to which the object will be mapped to</typeparam>
+        /// <returns>A pagination response with the results paginated</returns>
         public static async Task<PaginationResponse<TOut>> ToPaginatedAsync<TIn, TOrderBy, TOut>(this IQueryable<TIn> queryable, PaginationRequest request, 
-            Expression<Func<TIn, TOrderBy>> orderBy, CancellationToken cancellationToken)
+            Expression<Func<TIn, TOrderBy>> orderBy, OrderDirection direction, CancellationToken cancellationToken)
         {
             var (pageNumber, pageSize) = request;
             var (skip, totalPages) = PaginationProcessing.CalculatePagination(queryable, request);
-            var data = await PaginationProcessing.QueryPaginatedAsync(queryable, skip, pageSize, orderBy, cancellationToken);
+            var data = await PaginationProcessing.QueryPaginatedAsync(queryable, skip, pageSize, orderBy, direction, cancellationToken);
             var result = new PaginationResponse<TOut>(data.Adapt<List<TOut>>())
             {
                 PageNumber = pageNumber,
