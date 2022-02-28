@@ -82,34 +82,4 @@ public class PaginationExtensionsTests
         // assert
         await result.Should().ThrowAsync<TaskCanceledException>();
     }
-    
-    [Fact]
-    public async Task ToPaginatedOverloadSimple_ShouldReturnThePaginatedResult()
-    {
-        // arrange
-
-        // act
-        var result = await _data.ToPaginatedAsync<TestData, int, TestData>(x => x.Id, 
-            _cts.Token);
-        
-        // assert
-        result.Should().NotBeNull().And.BeOfType<PaginationResponse<TestData>>();
-        result.Data.Should().BeOfType<List<TestData>>().And.HaveCount(15);
-        result.As<PaginationResponse<TestData>>().TotalPages.Should().Be(2);
-    }
-    
-    [Fact]
-    public async Task ToPaginatedOverloadDirection_ShouldReturnThePaginatedResult()
-    {
-        // arrange
-
-        // act
-        var result = await _data.ToPaginatedAsync<TestData, int, TestData>(x => x.Id, OrderDirection.Ascending, 
-            _cts.Token);
-        
-        // assert
-        result.Should().NotBeNull().And.BeOfType<PaginationResponse<TestData>>();
-        result.Data.Should().BeOfType<List<TestData>>().And.HaveCount(15);
-        result.As<PaginationResponse<TestData>>().TotalPages.Should().Be(2);
-    }
 }
