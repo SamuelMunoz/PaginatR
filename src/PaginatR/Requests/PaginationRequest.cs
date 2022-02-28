@@ -8,12 +8,12 @@ namespace PaginatR.Requests
         /// <summary>
         /// The page number to request
         /// </summary>
-        public int? PageNumber { get; set; }
-    
+        public int? PageNumber { get; set; } = 1;
+
         /// <summary>
         /// The total number of items per page
         /// </summary>
-        public int? PageSize { get; set;  }
+        public int? PageSize { get; set; } = 15;
 
         public PaginationRequest()
         {
