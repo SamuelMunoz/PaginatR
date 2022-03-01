@@ -1,5 +1,5 @@
 using FluentAssertions;
-using PaginatR.Requests;
+using PaginatR.Contracts;
 using Xunit;
 
 namespace PaginatR.Tests;

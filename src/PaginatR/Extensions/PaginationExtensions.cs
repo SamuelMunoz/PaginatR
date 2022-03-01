@@ -5,10 +5,9 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Mapster;
+using PaginatR.Contracts;
 using PaginatR.Enums;
 using PaginatR.Process;
-using PaginatR.Requests;
-using PaginatR.Responses;
 
 namespace PaginatR.Extensions
 {
@@ -32,14 +31,14 @@ namespace PaginatR.Extensions
             var (pageNumber, pageSize) = request;
             var (skip, totalPages) = PaginationProcessing.CalculatePagination(queryable, request);
             var data = await PaginationProcessing.QueryPaginatedAsync(queryable, skip, pageSize, orderBy, direction, cancellationToken);
-            var result = new PaginationResponse<TOut>(data.Adapt<List<TOut>>())
-            {
-                PageNumber = pageNumber,
-                PageSize = pageSize,
-                TotalPages = totalPages,
-                HasPrevious = pageNumber > 1,
-                HasNext = pageNumber < totalPages
-            };
+            var result = new PaginationResponse<TOut>(
+                data.Adapt<List<TOut>>(),
+                pageNumber,
+                pageSize,
+                totalPages,
+                pageNumber > 1,
+                pageNumber < totalPages
+            );
             return await Task.FromResult(result);
         }
     }

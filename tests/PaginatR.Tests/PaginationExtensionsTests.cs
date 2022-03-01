@@ -4,10 +4,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
+using PaginatR.Contracts;
 using PaginatR.Enums;
 using PaginatR.Extensions;
-using PaginatR.Requests;
-using PaginatR.Responses;
 using Xunit;
 
 namespace PaginatR.Tests;
@@ -15,7 +14,7 @@ namespace PaginatR.Tests;
 public class PaginationExtensionsTests
 {
     private PaginationRequest? _request;
-    private readonly IQueryable<TestData> _data;
+    private readonly IQueryable<TestModel> _data;
     private readonly CancellationTokenSource _cts;
 
     public PaginationExtensionsTests()
@@ -35,17 +34,17 @@ public class PaginationExtensionsTests
         _request = new(page, size);
 
         // act
-        var result = await _data.ToPaginatedAsync<TestData, int, TestData>(_request, 
+        var result = await _data.ToPaginatedAsync<TestModel, int, TestModel>(_request, 
             x => x.Id, OrderDirection.Ascending, _cts.Token);
         
         // assert
-        result.Should().NotBeNull().And.BeOfType<PaginationResponse<TestData>>();
-        result.Data.Should().BeOfType<List<TestData>>().And.HaveCount(size);
-        result.As<PaginationResponse<TestData>>().TotalPages.Should().Be(expectedPages);
-        result.As<PaginationResponse<TestData>>().PageSize.Should().Be(size);
-        result.As<PaginationResponse<TestData>>().PageNumber.Should().Be(page);
-        result.As<PaginationResponse<TestData>>().HasPrevious.Should().Be(hasPrevious);
-        result.As<PaginationResponse<TestData>>().HasNext.Should().Be(hasNext);
+        result.Should().NotBeNull().And.BeOfType<PaginationResponse<TestModel>>();
+        result.Data.Should().BeOfType<List<TestModel>>().And.HaveCount(size);
+        result.As<PaginationResponse<TestModel>>().TotalPages.Should().Be(expectedPages);
+        result.As<PaginationResponse<TestModel>>().PageSize.Should().Be(size);
+        result.As<PaginationResponse<TestModel>>().PageNumber.Should().Be(page);
+        result.As<PaginationResponse<TestModel>>().HasPrevious.Should().Be(hasPrevious);
+        result.As<PaginationResponse<TestModel>>().HasNext.Should().Be(hasNext);
     }
     
     [Theory]
@@ -58,14 +57,14 @@ public class PaginationExtensionsTests
         _request = new(page, size);
 
         // act
-        var result = await _data.ToPaginatedAsync<TestData, int, TestData>(_request, 
+        var result = await _data.ToPaginatedAsync<TestModel, int, TestModel>(_request, 
             x => x.Id, OrderDirection.Descending, _cts.Token);
         
         // assert
-        result.Should().NotBeNull().And.BeOfType<PaginationResponse<TestData>>();
-        result.Data.Should().BeOfType<List<TestData>>().And.HaveCount(size);
-        result.As<PaginationResponse<TestData>>().TotalPages.Should().Be(expectedPages);
-        result.As<PaginationResponse<TestData>>().PageNumber.Should().Be(page);
+        result.Should().NotBeNull().And.BeOfType<PaginationResponse<TestModel>>();
+        result.Data.Should().BeOfType<List<TestModel>>().And.HaveCount(size);
+        result.As<PaginationResponse<TestModel>>().TotalPages.Should().Be(expectedPages);
+        result.As<PaginationResponse<TestModel>>().PageNumber.Should().Be(page);
     }
     
     [Fact]
@@ -76,7 +75,7 @@ public class PaginationExtensionsTests
 
         // act
         _cts.Cancel();
-        Func<Task> result = () => _data.ToPaginatedAsync<TestData, int, TestData>(_request, 
+        Func<Task> result = () => _data.ToPaginatedAsync<TestModel, int, TestModel>(_request, 
             x => x.Id, OrderDirection.Descending, _cts.Token);
         
         // assert

@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using FluentAssertions;
-using PaginatR.Responses;
+using PaginatR.Contracts;
 using Xunit;
 
 namespace PaginatR.Tests;
 
 public class PaginationResponseTests
 {
-    private PaginationResponse<TestData>? _sut;
-    private readonly List<TestData> _list;
+    private PaginationResponse<TestModel>? _sut;
+    private readonly List<TestModel> _list;
 
     public PaginationResponseTests()
     {
@@ -19,9 +19,9 @@ public class PaginationResponseTests
     public void Response_DataShouldBeTheSame_WhenInitialized()
     {
         // act
-        _sut = new(_list);
+        _sut = new(_list, 1, 50, 1, false, false);
         
         // assert
-        _sut.Data.Should().NotBeNull().And.BeOfType<List<TestData>>().And.HaveCount(50);
+        _sut.Data.Should().NotBeNull().And.BeOfType<List<TestModel>>().And.HaveCount(50);
     }
 }

@@ -5,8 +5,8 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Ardalis.GuardClauses;
+using PaginatR.Contracts;
 using PaginatR.Enums;
-using PaginatR.Requests;
 
 namespace PaginatR.Process
 {
