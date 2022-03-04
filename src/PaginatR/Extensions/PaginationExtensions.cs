@@ -36,6 +36,7 @@ namespace PaginatR.Extensions
                 pageNumber,
                 pageSize,
                 totalPages,
+                queryable.Count(),
                 pageNumber > 1,
                 pageNumber < totalPages
             );

@@ -19,7 +19,7 @@ public class PaginationResponseTests
     public void Response_DataShouldBeTheSame_WhenInitialized()
     {
         // act
-        _sut = new(_list, 1, 50, 1, false, false);
+        _sut = new(_list, 1, 50, 1, 50,false, false);
         
         // assert
         _sut.Data.Should().NotBeNull().And.BeOfType<List<TestModel>>().And.HaveCount(50);

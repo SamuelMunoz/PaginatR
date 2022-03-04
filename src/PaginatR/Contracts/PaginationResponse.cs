@@ -17,6 +17,7 @@ namespace PaginatR.Contracts
         int? PageNumber,
         int? PageSize,
         int? TotalPages,
+        int TotalRecords,
         bool HasPrevious,
         bool HasNext
     );
