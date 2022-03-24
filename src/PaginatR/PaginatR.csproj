@@ -4,7 +4,7 @@
     <Nullable>enable</Nullable>
     <PackageId>PaginatR</PackageId>
     <RepositoryType>git</RepositoryType>
-    <Authors>Samuel Munoz</Authors>
+    <Authors>Samuel Muñoz</Authors>
     <PackageProjectUrl>https://github.com/SamuelMunoz/PaginatR</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SamuelMunoz/PaginatR</RepositoryUrl>
     <TargetFramework>net5.0</TargetFramework>
