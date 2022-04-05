@@ -19,8 +19,9 @@ namespace PaginatR.Process
         /// <param name="request">The request object</param>
         /// <typeparam name="T">The type to be used</typeparam>
         /// <returns>Tuple with skip and take to be used with LINQ</returns>
-        internal static (int?, int?) CalculatePagination<T>(IQueryable<T> queryable, PaginationRequest request)
+        internal static (int?, int?) CalculatePagination<T>(IQueryable<T>? queryable, PaginationRequest request)
         {
+            Guard.Against.Null(queryable, nameof(queryable));
             var (pageNumber, pageSize) = request;
             var skip = (pageNumber - 1) * pageSize;
             var totalPages = (int) Math.Ceiling(queryable.Count() / (double) (pageSize ?? 15));
@@ -40,7 +41,7 @@ namespace PaginatR.Process
         /// <typeparam name="TOrderBy">The order by type</typeparam>
         /// <returns>A task-based list of results</returns>
         internal static Task<List<T>> QueryPaginatedAsync<T, TOrderBy>(IQueryable<T> queryable, int? skip, int? pageSize,
-            Expression<Func<T, TOrderBy>> orderBy, OrderDirection direction, CancellationToken cancellationToken)
+            Expression<Func<T, TOrderBy>> orderBy, OrderDirection? direction, CancellationToken cancellationToken)
         {
             if (cancellationToken.IsCancellationRequested)
             {

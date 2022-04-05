@@ -34,8 +34,11 @@ public class PaginationExtensionsTests
         _request = new(page, size);
 
         // act
-        var result = await _data.ToPaginatedAsync<TestModel, int, TestModel>(_request, 
-            x => x.Id, OrderDirection.Ascending, _cts.Token);
+        var result = await _data.ToPaginatedAsync<TestModel, int, TestModel>(
+            _request, 
+            x => x.Id, 
+            OrderDirection.Ascending, 
+            _cts.Token);
         
         // assert
         result.Should().NotBeNull().And.BeOfType<PaginationResponse<TestModel>>();
@@ -43,6 +46,7 @@ public class PaginationExtensionsTests
         result.As<PaginationResponse<TestModel>>().TotalPages.Should().Be(expectedPages);
         result.As<PaginationResponse<TestModel>>().PageSize.Should().Be(size);
         result.As<PaginationResponse<TestModel>>().PageNumber.Should().Be(page);
+        result.As<PaginationResponse<TestModel>>().TotalRecords.Should().Be(20);
         result.As<PaginationResponse<TestModel>>().HasPrevious.Should().Be(hasPrevious);
         result.As<PaginationResponse<TestModel>>().HasNext.Should().Be(hasNext);
     }
