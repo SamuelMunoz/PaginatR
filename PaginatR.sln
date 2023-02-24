@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{6E5A7C22
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaginatR.Tests", "tests\PaginatR.Tests\PaginatR.Tests.csproj", "{C1553C23-E4C4-47B2-B3DC-CC94CCF816D5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{6ADF9E89-E34C-4CFD-A5DB-8334B31FE435}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6ADF9E89-E34C-4CFD-A5DB-8334B31FE435}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ADF9E89-E34C-4CFD-A5DB-8334B31FE435}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{771210A4-8FFE-4FEA-AD2F-565DBD989747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{771210A4-8FFE-4FEA-AD2F-565DBD989747}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{771210A4-8FFE-4FEA-AD2F-565DBD989747}.Release|Any CPU.ActiveCfg = Release|Any CPU
